@@ -20,8 +20,8 @@ public class MarkovRunner {
         String st = seFileUtil.asString();
         st = st.replace('\n', ' ');
         MarkovOne markov = new MarkovOne();
-        markov.setSeed(42);
         markov.setTraining(st);
+		markov.setSeed(24);
         for(int k=0; k < 3; k++){
             String text = markov.getRandomText(500);
             printOut(text);

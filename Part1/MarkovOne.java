@@ -26,10 +26,11 @@ public class MarkovOne {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < myText.length(); i++) {
             ArrayList<String> char_list = getFollows(String.valueOf(myText.charAt(i)));
-            for (int k = 0; k < char_list.size(); k++) {
-                int index = myRandom.nextInt(myText.length());
-                sb.append(myText.charAt(index));
+            for (int k = 0; k < numChars; k++) {
+                int index = myRandom.nextInt(char_list.size());
+                sb.append(char_list.get(index));
             }
+        char_list.clear();
         }
         return sb.toString();
     }
