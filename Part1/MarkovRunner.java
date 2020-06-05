@@ -8,6 +8,7 @@ public class MarkovRunner {
 		st = st.replace('\n', ' ');
 		MarkovZero markov = new MarkovZero();
 		markov.setTraining(st);
+		//markov.setSeed(42);
 		for(int k=0; k < 3; k++){
 			String text = markov.getRandomText(500);
 			printOut(text);
@@ -21,12 +22,26 @@ public class MarkovRunner {
         st = st.replace('\n', ' ');
         MarkovOne markov = new MarkovOne();
         markov.setTraining(st);
-		markov.setSeed(24);
+		markov.setSeed(42);
         for(int k=0; k < 3; k++){
             String text = markov.getRandomText(500);
             printOut(text);
         }
     }
+
+	public void runMarkovFour(String trainingFilePath) {
+
+		SEFileUtil seFileUtil = new SEFileUtil(trainingFilePath);
+		String st = seFileUtil.asString();
+		st = st.replace('\n', ' ');
+		MarkovFour markov = new MarkovFour();
+		markov.setTraining(st);
+		markov.setSeed(25);
+		for(int k=0; k < 3; k++){
+			String text = markov.getRandomText(500);
+			printOut(text);
+		}
+	}
 
 	private void printOut(String s){
 		String[] words = s.split("\\s+");
@@ -48,7 +63,8 @@ public class MarkovRunner {
 		//MarkovOne markov1 = new MarkovOne();
 		//markov1.setSeed(42);
 		//markovRunner.runMarkovZero(args[0]);
-		markovRunner.runMarkovOne(args[0]);
+		//markovRunner.runMarkovOne(args[0]);
+		markovRunner.runMarkovFour(args[0]);
 		//Tester.testGetFollows();
 	}
 
