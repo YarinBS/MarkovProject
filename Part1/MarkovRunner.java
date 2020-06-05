@@ -43,6 +43,21 @@ public class MarkovRunner {
 		}
 	}
 
+	public void runMarkovModel(String trainingFilePath) {
+
+		SEFileUtil seFileUtil = new SEFileUtil(trainingFilePath);
+		String st = seFileUtil.asString();
+		st = st.replace('\n', ' ');
+		MarkovModel markov = new MarkovModel();
+		markov.setTraining(st);
+		markov.setSeed(40);
+		markov.setNumOfChars(6);
+		for(int k=0; k < 3; k++){
+			String text = markov.getRandomText(500);
+			printOut(text);
+		}
+	}
+
 	private void printOut(String s){
 		String[] words = s.split("\\s+");
 		int psize = 0;
@@ -64,8 +79,9 @@ public class MarkovRunner {
 		//markov1.setSeed(42);
 		//markovRunner.runMarkovZero(args[0]);
 		//markovRunner.runMarkovOne(args[0]);
-		markovRunner.runMarkovFour(args[0]);
+		//markovRunner.runMarkovFour(args[0]);
 		//Tester.testGetFollows();
+		markovRunner.runMarkovModel(args[0]);
 	}
 
 }
