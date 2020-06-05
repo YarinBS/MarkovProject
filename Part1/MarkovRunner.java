@@ -80,7 +80,7 @@ public class MarkovRunner {
 		//markovRunner.runMarkovZero(args[0]);
 		//markovRunner.runMarkovOne(args[0]);
 		//markovRunner.runMarkovFour(args[0]);
-		//Tester.testGetFollows();
+		Tester.testGetFollows();
 		markovRunner.runMarkovModel(args[0]);
 	}
 
