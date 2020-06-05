@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.lang.Math;
 
 public class MarkovModel {
     private String myText;
@@ -29,7 +30,7 @@ public class MarkovModel {
         StringBuilder sb = new StringBuilder();
         sb.append(myText.substring(index, index + numOfChars));
         for (int i = 0; i < numChars; i++) {
-            ArrayList<String> char_list = getFollows(sb.substring(i, i + numOfChars));
+            ArrayList<String> char_list = getFollows(sb.substring(i, Math.min(i + numOfChars,sb.length())));
             if (char_list.size() != 0) {
                 index = myRandom.nextInt(char_list.size());
                 sb.append(char_list.get(index));
