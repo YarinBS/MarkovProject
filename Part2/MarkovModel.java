@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.lang.Math;
 
-public class MarkovModel {
+public class MarkovModel extends AbstractMarkovModel {
     private String myText;
     private Random myRandom;
     private int numOfChars;
@@ -15,13 +15,14 @@ public class MarkovModel {
         myRandom = new Random(seed);
     }
 
+    @Override
     public void setTraining(String s) {
         myText = s.trim();
     }
 
     public void setNumOfChars(int n) { numOfChars = n;}
 
-    //1.5
+    @Override
     public String getRandomText(int numChars) {
         if (myText == null) {
             return "";
@@ -29,8 +30,8 @@ public class MarkovModel {
         int index = myRandom.nextInt(myText.length() - numOfChars);
         StringBuilder sb = new StringBuilder();
         sb.append(myText.substring(index, index + numOfChars));
-        for (int i = 0; i < numChars; i++) {
-            ArrayList<String> char_list = getFollows(sb.substring(i, Math.min(i + numOfChars,sb.length())));
+        for (int i = 0; i < numChars - numOfChars; i++) {
+            ArrayList<String> char_list = getFollows(sb.substring(sb.length() - numOfChars, sb.length()));
             if (char_list.size() != 0) {
                 index = myRandom.nextInt(char_list.size());
                 sb.append(char_list.get(index));

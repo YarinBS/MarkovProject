@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class MarkovZero {
+public class MarkovZero extends AbstractMarkovModel {
     private String myText;
 	private Random myRandom;
 	
@@ -11,11 +11,13 @@ public class MarkovZero {
 	public void setSeed(int seed){
 		myRandom = new Random(seed);
 	}
-	
+
+	@Override
 	public void setTraining(String s){
 		myText = s.trim();
 	}
-	
+
+	@Override
 	public String getRandomText(int numChars){
 		if (myText == null){
 			return "";
