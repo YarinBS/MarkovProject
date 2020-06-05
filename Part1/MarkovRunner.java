@@ -8,7 +8,7 @@ public class MarkovRunner {
 		st = st.replace('\n', ' ');
 		MarkovZero markov = new MarkovZero();
 		markov.setTraining(st);
-		//markov.setSeed(42);
+		markov.setSeed(25);
 		for(int k=0; k < 3; k++){
 			String text = markov.getRandomText(500);
 			printOut(text);
@@ -22,7 +22,7 @@ public class MarkovRunner {
         st = st.replace('\n', ' ');
         MarkovOne markov = new MarkovOne();
         markov.setTraining(st);
-		markov.setSeed(42);
+		markov.setSeed(25);
         for(int k=0; k < 3; k++){
             String text = markov.getRandomText(500);
             printOut(text);
@@ -50,7 +50,7 @@ public class MarkovRunner {
 		st = st.replace('\n', ' ');
 		MarkovModel markov = new MarkovModel();
 		markov.setTraining(st);
-		markov.setSeed(40);
+		markov.setSeed(25);
 		markov.setNumOfChars(6);
 		for(int k=0; k < 3; k++){
 			String text = markov.getRandomText(500);
@@ -75,13 +75,9 @@ public class MarkovRunner {
 
 	public static void main(String[] args) {
 		MarkovRunner markovRunner = new MarkovRunner();
-		//MarkovOne markov1 = new MarkovOne();
-		//markov1.setSeed(42);
-		//markovRunner.runMarkovZero(args[0]);
-		//markovRunner.runMarkovOne(args[0]);
-		//markovRunner.runMarkovFour(args[0]);
-		Tester.testGetFollows();
+		markovRunner.runMarkovZero(args[0]);
+		markovRunner.runMarkovOne(args[0]);
+		markovRunner.runMarkovFour(args[0]);
 		markovRunner.runMarkovModel(args[0]);
 	}
-
 }
