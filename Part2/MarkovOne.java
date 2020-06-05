@@ -7,11 +7,18 @@ public class MarkovOne extends AbstractMarkovModel {
     private Random myRandom;
 
     public MarkovOne() {
+        super(1);
         myRandom = new Random();
     }
 
+    @Override
     public void setSeed(int seed) {
         myRandom = new Random(seed);
+    }
+
+    @Override
+    public String toString() {
+        return "MarkovModel of order " + this.orderOfMarkov;
     }
 
     @Override
@@ -21,7 +28,7 @@ public class MarkovOne extends AbstractMarkovModel {
 
     @Override
     public String getRandomText(int numChars) {
-        if (myText == null) {
+        if (this.myText == null) {
             return "";
         }
         int index = myRandom.nextInt(myText.length() - 1);  // change -1 to markovNumber

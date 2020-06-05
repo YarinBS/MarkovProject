@@ -3,4 +3,5 @@ public interface IMarkovModel {
 
     public String getRandomText(int numChars);
 
+    void setSeed(int seed);
 }

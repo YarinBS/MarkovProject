@@ -7,9 +7,11 @@ public class MarkovFour extends AbstractMarkovModel {
     private Random myRandom;
 
     public MarkovFour() {
+        super(4);
         myRandom = new Random();
     }
 
+    @Override
     public void setSeed(int seed) {
         myRandom = new Random(seed);
     }
@@ -17,6 +19,11 @@ public class MarkovFour extends AbstractMarkovModel {
     @Override
     public void setTraining(String s) {
         myText = s.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "MarkovModel of order " + this.orderOfMarkov;
     }
 
     @Override

@@ -5,11 +5,17 @@ public class MarkovZero extends AbstractMarkovModel {
 	private Random myRandom;
 	
 	public MarkovZero() {
+		super(0);
 		myRandom = new Random();
 	}
-	
+
 	public void setSeed(int seed){
 		myRandom = new Random(seed);
+	}
+
+	@Override
+	public String toString() {
+		return "MarkovModel of order " + this.orderOfMarkov;
 	}
 
 	@Override

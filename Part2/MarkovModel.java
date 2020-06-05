@@ -7,12 +7,19 @@ public class MarkovModel extends AbstractMarkovModel {
     private Random myRandom;
     private int numOfChars;
 
-    public MarkovModel() {
+    public MarkovModel(int num) {
+        super(num);
         myRandom = new Random();
     }
 
+    @Override
     public void setSeed(int seed) {
         myRandom = new Random(seed);
+    }
+
+    @Override
+    public String toString() {
+        return "MarkovModel of order " + this.orderOfMarkov;
     }
 
     @Override

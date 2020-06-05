@@ -1,13 +1,19 @@
+//Employee
+
 import java.util.*;
 
 public abstract class AbstractMarkovModel implements IMarkovModel {
     protected String myText;
     protected Random myRandom;
-    protected int orderOfMarkov;
+    public int orderOfMarkov;
+    public int seed;
     
-    public AbstractMarkovModel() {
+    public AbstractMarkovModel(int orderOfMarkov) {
         myRandom = new Random();
+        this.orderOfMarkov = orderOfMarkov;
     }
+
+    public void setSeed(int seed) { myRandom = new Random(seed); }
     
     public void setTraining(String s) {
         myText = s.trim();
@@ -26,6 +32,10 @@ public abstract class AbstractMarkovModel implements IMarkovModel {
             }
         }
         return chars_list;
+    }
+
+    public String toString(int orderOfMarkov) {
+        return "MarkovModel of order " + orderOfMarkov;
     }
 
 }
