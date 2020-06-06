@@ -1,11 +1,9 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.lang.Math;
 
 public class MarkovModel extends AbstractMarkovModel {
     private String myText;
     private Random myRandom;
-    private int numOfChars;
 
     public MarkovModel(int num) {
         super(num);
@@ -27,18 +25,16 @@ public class MarkovModel extends AbstractMarkovModel {
         myText = s.trim();
     }
 
-    public void setNumOfChars(int n) { numOfChars = n;}
-
     @Override
     public String getRandomText(int numChars) {
         if (myText == null) {
             return "";
         }
-        int index = myRandom.nextInt(myText.length() - numOfChars);
+        int index = myRandom.nextInt(myText.length() - this.orderOfMarkov);
         StringBuilder sb = new StringBuilder();
-        sb.append(myText.substring(index, index + numOfChars));
-        for (int i = 0; i < numChars - numOfChars; i++) {
-            ArrayList<String> char_list = getFollows(sb.substring(sb.length() - numOfChars, sb.length()));
+        sb.append(myText.substring(index, index + this.orderOfMarkov));
+        for (int i = 0; i < numChars - this.orderOfMarkov; i++) {
+            ArrayList<String> char_list = getFollows(sb.substring(sb.length() - this.orderOfMarkov, sb.length()));
             if (char_list.size() != 0) {
                 index = myRandom.nextInt(char_list.size());
                 sb.append(char_list.get(index));
@@ -50,7 +46,7 @@ public class MarkovModel extends AbstractMarkovModel {
     // 1.3
     public ArrayList<String> getFollows(String key) {
         ArrayList<String> chars_list = new ArrayList<String>();
-        for (int i = 0; i < myText.length() - numOfChars; i++) {
+        for (int i = 0; i < myText.length() - this.orderOfMarkov; i++) {
             if (myText.substring(i, i + key.length()).equals(key)) {
                 if (i + key.length() - 1 != myText.length() - 1) {
                     String follow_char = String.valueOf(myText.charAt(i + key.length()));
