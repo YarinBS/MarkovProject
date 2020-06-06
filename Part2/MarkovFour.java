@@ -35,7 +35,7 @@ public class MarkovFour extends AbstractMarkovModel {
         StringBuilder sb = new StringBuilder();
         sb.append(myText.substring(index, index + 4));
         for (int i = 0; i < numChars - 4; i++) {
-            ArrayList<String> char_list = getFollows(sb.substring(sb.length() - 4, sb.length()));
+            ArrayList<Character> char_list = getFollows(sb.substring(sb.length() - 4, sb.length()));
             if (char_list.size() <= 0) {
                 continue;
             }
@@ -45,12 +45,12 @@ public class MarkovFour extends AbstractMarkovModel {
         return sb.toString();
     }
 
-    public ArrayList<String> getFollows(String key) {
-        ArrayList<String> chars_list = new ArrayList<String>();
+    public ArrayList<Character> getFollows(String key) {
+        ArrayList<Character> chars_list = new ArrayList<Character>();
         for (int i = 0; i < myText.length() - 4; i++) {
             if (myText.substring(i, i + key.length()).equals(key)) {
                 if (i + key.length() - 1 != myText.length() - 1) {
-                    String follow_char = String.valueOf(myText.charAt(i + key.length()));
+                    char follow_char = myText.charAt(i + key.length());
                     chars_list.add(follow_char);
                 }
             }

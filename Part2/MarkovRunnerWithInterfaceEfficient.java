@@ -1,9 +1,6 @@
 import util.SEFileUtil;
 
-/**
- * The class is use to generate random text
- */
-public class MarkovRunnerWithInterface {
+public class MarkovRunnerWithInterfaceEfficient {
     public void runModel(IMarkovModel markov, String text, int size, int seed) {
         markov.setSeed(seed);
         System.out.println("running with " + markov.toString());
@@ -12,26 +9,6 @@ public class MarkovRunnerWithInterface {
             String st = markov.getRandomText(size);
             printOut(st);
         }
-    }
-
-    public void runMarkov(String trainingFilePath, int seed) {
-        SEFileUtil seFileUtil = new SEFileUtil(trainingFilePath);
-        String st = seFileUtil.asString();
-        st = st.replace('\n', ' ');
-        int size = 200;
-
-        MarkovZero mz = new MarkovZero();
-        runModel(mz, st, size, seed);
-
-        MarkovOne mOne = new MarkovOne();
-        runModel(mOne, st, size, seed);
-
-        MarkovModel mThree = new MarkovModel(3);
-        runModel(mThree, st, size, seed);
-
-        MarkovFour mFour = new MarkovFour();
-        runModel(mFour, st, size, seed);
-
     }
 
     private void printOut(String s) {
@@ -49,17 +26,29 @@ public class MarkovRunnerWithInterface {
         System.out.println("\n----------------------------------");
     }
 
+    public void testHashMap(String trainingFilePath, int seed) {
+        SEFileUtil seFileUtil = new SEFileUtil(trainingFilePath);
+        String st = seFileUtil.asString();
+        st = st.replace('\n', ' ');
+        int size = 200;
+        EfficientMarkovModel emFive = new EfficientMarkovModel(5);
+        runModel(emFive, st, size, seed);
+    }
+
     public static void main(String args[]) {
         if (args.length != 2) {
             System.out.println("Please pass two arguments: 1.input_file 2.seed");
             System.exit(1);
         }
-        MarkovRunnerWithInterface markov = new MarkovRunnerWithInterface();
+        MarkovRunnerWithInterfaceEfficient markov = new MarkovRunnerWithInterfaceEfficient();
         try {
-            markov.runMarkov(args[0], Integer.parseInt(args[1]));
+            markov.testHashMap(args[0], Integer.parseInt(args[1]));
         } catch (NumberFormatException exc) {
             System.out.println("The second argument must be an integer");
             System.exit(1);
         }
     }
 }
+
+
+
