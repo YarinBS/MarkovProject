@@ -1,7 +1,14 @@
 import util.SEFileUtil;
 
 public class MarkovRunnerWithInterfaceEfficient {
+    /** The class is use to generate random text */
     public void runModel(IMarkovModel markov, String text, int size, int seed) {
+        /**
+         * @param markov - a Markov object instance from the current run
+         * @param text - text from the given file
+         * @param size - the number of characters that will be printed in each paragraph
+         * @param seed - a number that sets myRandom
+         * */
         markov.setSeed(seed);
         System.out.println("running with " + markov.toString());
         markov.setTraining(text);
@@ -12,6 +19,9 @@ public class MarkovRunnerWithInterfaceEfficient {
     }
 
     private void printOut(String s) {
+        /** prints the scrambled text that was created with two separating lines between paragraphs
+         * @param s - text from the given file
+         * */
         String[] words = s.split("\\s+");
         int psize = 0;
         System.out.println("----------------------------------");
@@ -27,6 +37,10 @@ public class MarkovRunnerWithInterfaceEfficient {
     }
 
     public void testHashMap(String trainingFilePath, int seed) {
+        /** tests the credibility of the hashing process
+         * @param trainingFilePath - local path to text file
+         * @param seed - a number that sets myRandom
+         * */
         SEFileUtil seFileUtil = new SEFileUtil(trainingFilePath);
         String st = seFileUtil.asString();
         st = st.replace('\n', ' ');
