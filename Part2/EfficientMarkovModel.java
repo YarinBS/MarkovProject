@@ -1,23 +1,24 @@
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 
 public class EfficientMarkovModel extends AbstractMarkovModel {
+    /** class attributes and functions for more effective markov model */
     private String myText;
     private Random myRandom;
     private HashMap<String, ArrayList<Character>> hashMap;
 
-    public EfficientMarkovModel(int num) {
+    public EfficientMarkovModel(int num) { /** builder */
         super(num);
         this.myRandom = new Random();
         this.hashMap = new <String, ArrayList<Character>>HashMap();
     }
 
     @Override
-    public void setSeed(int seed) {
+    public void setSeed(int seed) {   /** @param seed - a number that sets myRandom */
         myRandom = new Random(seed);
     }
+
 
     @Override
     public String toString() {
@@ -25,13 +26,19 @@ public class EfficientMarkovModel extends AbstractMarkovModel {
     }
 
     @Override
-    public void setTraining(String s) {
+    public void setTraining(String s) {     /**
+     * string manipulations
+     @param seed - a number that sets myRandom */
         myText = s.trim();
         this.buildMap();
     }
 
     @Override
     public String getRandomText(int numChars) {
+        /** given an integer 'numChars', returns a String of text with numChars characters
+         * @param numChars - set the number of characters that will be printed in each paragraph
+         * @return a String containing the scrambled text*/
+
         if (myText == null) {
             return "";
         }
@@ -48,7 +55,9 @@ public class EfficientMarkovModel extends AbstractMarkovModel {
         return sb.toString();
     }
 
-    public void buildMap() {
+    public void buildMap() { /** creates a dictionary that holds keys and their follwers
+     * for the spesific [order of markov]*/
+
         ArrayList<Character> chars_list = new ArrayList<Character>();
         for (int i = 0; i < myText.length() - this.orderOfMarkov; i++) {
             String key = myText.substring(i, i + this.orderOfMarkov);
@@ -73,10 +82,9 @@ public class EfficientMarkovModel extends AbstractMarkovModel {
     }
 
 
-
-
     // 1.3
-    public ArrayList<Character> getFollows(String key) {
+    public ArrayList<Character> getFollows(String key) {/** given a key returns the compatible list of followers
+     @param key - a substring from the text*/
         return this.hashMap.get(key);
     }
 }

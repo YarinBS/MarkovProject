@@ -3,21 +3,27 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MarkovFour extends AbstractMarkovModel {
+    /**
+     * contains the Markov Four arguments and methods
+     */
     private String myText;
     private Random myRandom;
 
-    public MarkovFour() {
+    public MarkovFour() { /** builder */
         super(4);
         myRandom = new Random();
     }
 
     @Override
     public void setSeed(int seed) {
+        /** @param seed - a number that sets myRandom */
         myRandom = new Random(seed);
     }
 
     @Override
     public void setTraining(String s) {
+        /** string manipulations
+         @param seed - a number that sets myRandom */
         myText = s.trim();
     }
 
