@@ -34,6 +34,9 @@ public class MarkovFour extends AbstractMarkovModel {
 
     @Override
     public String getRandomText(int numChars) {
+        /** given an integer 'numChars', returns a String of text with numChars characters
+         * @param numChars - set the number of characters that will be printed in each paragraph
+         * @return a String containing the scrambled text*/
         if (myText == null) {
             return "";
         }
@@ -52,6 +55,10 @@ public class MarkovFour extends AbstractMarkovModel {
     }
 
     public ArrayList<Character> getFollows(String key) {
+        /** given a String 'key', return an ArrayList containing all charaters that follow the given String 'key'
+         * @param key - a character or substring from the text
+         * @return an ArrayList containing all chars that follow the given key
+         * */
         ArrayList<Character> chars_list = new ArrayList<Character>();
         for (int i = 0; i < myText.length() - 4; i++) {
             if (myText.substring(i, i + key.length()).equals(key)) {

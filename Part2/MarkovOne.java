@@ -3,16 +3,20 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MarkovOne extends AbstractMarkovModel {
+    /**
+     * contains the Markov one arguments and methods
+     */
     private String myText;
     private Random myRandom;
 
-    public MarkovOne() {
+    public MarkovOne() {  /** builder */
         super(1);
         myRandom = new Random();
     }
 
     @Override
     public void setSeed(int seed) {
+        /** @param seed - a number that sets myRandom */
         myRandom = new Random(seed);
     }
 
@@ -23,11 +27,16 @@ public class MarkovOne extends AbstractMarkovModel {
 
     @Override
     public void setTraining(String s) {
+        /** string manipulations
+         @param seed - a number that sets myRandom */
         myText = s.trim();
     }
 
     @Override
     public String getRandomText(int numChars) {
+        /** given an integer 'numChars', returns a String of text with numChars characters
+         * @param numChars - set the number of characters that will be printed in each paragraph
+         * @return a String containing the scrambled text*/
         if (this.myText == null) {
             return "";
         }
@@ -44,6 +53,10 @@ public class MarkovOne extends AbstractMarkovModel {
 
     // 1.3
     public ArrayList<Character> getFollows(String key) {
+        /** given a String 'key', return an ArrayList containing all charaters that follow the given String 'key'
+         * @param key - a character or substring from the text
+         * @return an ArrayList containing all chars that follow the given key
+         * */
         ArrayList<Character> chars_list = new ArrayList<Character>();
         for (int i = 0; i < myText.length(); i++) {
             if (myText.substring(i, i + key.length()).equals(key)) {
